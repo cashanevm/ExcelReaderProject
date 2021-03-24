@@ -14,6 +14,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.obrii.mit.dp2021.Table.CellT;
+import org.obrii.mit.dp2021.Table.RowT;
+import org.obrii.mit.dp2021.Table.SheetT;
+import org.obrii.mit.dp2021.Table.Table;
 //@author NEVM PC
  
 public class ReadExcelClass {
@@ -26,7 +30,8 @@ public class ReadExcelClass {
 //    files = new FileInputStream(filePart);
     //}
  
-    
+static ArrayList<String> VAL = new ArrayList<>();
+static ArrayList<String> POS = new ArrayList<>();
 static ArrayList<String> TableList = new ArrayList<>();
 static ArrayList<String> HeightList = new ArrayList<>();
 //File file =;
@@ -111,7 +116,12 @@ public static void ReadExcel(){
         HeightList.add("1");
     }
     //mainProgram
+    Table table = new Table(0,"Name");
     try {
+        
+        
+        
+        
         //C:\\Users\\NEVM PC\\Documents\\NetBeansProjects\\
         file = new FileInputStream( new File("file"));
        System.out.println(new File("file").getName()); 
@@ -122,13 +132,21 @@ public static void ReadExcel(){
 //Get first/desired sheet from the workbook
         Iterator<Sheet> sheets = workbook.sheetIterator();
         //sheet
+        
+        
+        
+        
         while(sheets.hasNext()){
+        SheetT sheet = new SheetT(0);
         Sheet sh = sheets.next();
         Iterator<Row> rowIterator = sh.iterator();
         int rowN = 0;
         TableList.add("<td rowspan='1' colspan='"+ String.valueOf(max)+ "' class=\"\">"+ sh.getSheetName()+"</td>");
         //rows
+        
             while (rowIterator.hasNext()) {
+                RowT rowt = new RowT(rowN);
+                
                 Row row = rowIterator.next();
                 //For each row, iterate through all the columns
                 Iterator<Cell> cellIterator = row.cellIterator();
@@ -145,7 +163,10 @@ public static void ReadExcel(){
                 //row`s values
                 outer:
                 while (cellIterator.hasNext()) {                                
-                    Cell cell = cellIterator.next();                              
+                    Cell cell = cellIterator.next();  
+                    CellT cellt = new CellT(cellN);
+                    
+                    
                     //FIND MARGED//                                                           
                     //will iterate over the Merged cells
                     for (int i = 0; i < sh.getNumMergedRegions(); i++) {
@@ -164,15 +185,21 @@ public static void ReadExcel(){
                         //stringMarg.add(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getStringCellValue()));
                         stringMarg.add(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getCellFormula()));
                         intMarg.add(String.valueOf(colIndex));
+                        cellt.setValue(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getStringCellValue()));
+                        
+                        //rowt.setCell(cellt);
                         continue outer;
                     }
                     else 
                         if (rowNum == cell.getRowIndex() && colIndex == cell.getColumnIndex()) {
                         rowMargEnd.add(String.valueOf(colEnd));
                         colMargEnd.add(String.valueOf(rowEnd));
+                        
                         stringMarg.add(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getStringCellValue()));
                         //stringMarg.add(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getCellFormula()));
                         intMarg.add(String.valueOf(colIndex));
+                        cellt.setValue(String.valueOf(sh.getRow(rowNum).getCell(colIndex).getStringCellValue()));
+                        //rowt.setCell(cellt);
                         continue outer;
                     }
                 }   
@@ -185,11 +212,13 @@ public static void ReadExcel(){
                     
                     //if(str.equals("")){}else{
                     stringRow.add(strF);
+                    cellt.setValue(strF);
                     intRow.add(String.valueOf(cell.getColumnIndex()));
                     //}
                 } 
                 
                 if (cell.getCellType() == CellType.BLANK || cell.getCellType() == CellType._NONE) {
+                    cellt.setValue(cell.getStringCellValue());
                     rowNull.add("null");
                     rowNullNum.add(String.valueOf(cellN));                
                     cellN ++;
@@ -204,6 +233,7 @@ public static void ReadExcel(){
                     String str = objDefaultFormat.formatCellValue(cell);
                     
                     //if(str.equals("")){}else{
+                    cellt.setValue(str);
                     stringRow.add(str);
                     intRow.add(String.valueOf(cell.getColumnIndex()));
                     //}
@@ -214,22 +244,40 @@ public static void ReadExcel(){
                     
 //if(cell.getStringCellValue().equals("")){}
                    // else{
+                   cellt.setValue(cell.getStringCellValue());
                         stringRow.add(cell.getStringCellValue());
                     intRow.add(String.valueOf(cell.getColumnIndex())); 
                     //}
                                        
                 }
                 //System.out.print("it"+cellN);
+                //rowt.setCell(cellt);
                 cellN ++;
                 }        
         //ROW_FORMATER//
+       VAL.clear();
+       POS.clear();
         TableList.add(rowFormater(rowN,intRow ,stringRow , intMarg ,stringMarg , max,colMargEnd,rowMargEnd ,rowNull, rowNullNum));
+       
+        for(int i=0; i<POS.size();i++ ){
+           CellT cellt = new CellT(i);  
+        cellt.setValue(POS.get(i));
+        rowt.setCell(cellt);
+   
+        }
+        
+        
+        
         rows.add(tuple);
         flag = true;  
+        sheet.setRow(rowt);
+        
         rowN ++;
         }  
-        
+        table.setSheet(sheet);
         }
+        
+        
         workbook.close();
     }
     catch (Exception e) {
@@ -245,6 +293,30 @@ public static void ReadExcel(){
             }
         }                                 
     }
+     System.out.println("_____________________________________________________________");
+    
+     
+     for(int i =0 ; i< table.getSheetList().size();i++){
+         System.out.println("_____________________________________________________________"); 
+         for(int h =0 ; h< table.getSheetList().get(i).getRowList().size();h++){
+             System.out.println("_____________________________________________________________"); 
+             for(int j =0 ; j< table.getSheetList().get(i).getRowList().get(h).getCellList().size();j++){
+                System.out.println(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue());
+          
+          
+          }
+         
+          }
+     
+     
+     
+     }
+     
+     //System.out.println(table.getSheet(0).getRow(5).getCell(6).getValue());
+    
+    
+    
+    
 }
 //ROW FORMATER METHOD//
 public static String  rowFormater(int rowN,ArrayList<String> cellNum ,ArrayList<String> cellValue , ArrayList<String> margNum ,ArrayList<String> margValue, int rowSize,ArrayList<String> sellMargeEnd ,ArrayList<String> rowMargeEnd,ArrayList<String> rowNull,ArrayList<String> rowNullNum ){
@@ -416,7 +488,16 @@ boolean canWrite = false;
       canWrite = true;
       }
  }
+///// arr formater
 
+for(int i=0;i<mainValue.size();i++){
+ POS.add(mainPossion.get(i));
+}
+ 
+ 
+ 
+ 
+ 
     
     //STRING FORMATER//
     for(int i=0;i<usedPossion.size();i++){
@@ -554,8 +635,15 @@ boolean canWrite = false;
 }
 
 //RETURN TO SERVLET METHOD//
-public ArrayList<String> getList(){
+
+
+public void getRead(){
     ReadExcel();
+    
+}
+
+
+public ArrayList<String> getList(){
     return TableList;
 }
 //GET HIEGHT HELPER LIST

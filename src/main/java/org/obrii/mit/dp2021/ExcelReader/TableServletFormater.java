@@ -29,7 +29,6 @@ import org.obrii.mit.dp2021.ExcelReader.ReadExcelClass;
 public class TableServletFormater extends HttpServlet {
  
     
-    
  
  /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -97,9 +96,9 @@ public class TableServletFormater extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        getServletContext().getRequestDispatcher("/Pages/TableShaper").forward(request, response);
         //Part filePart = request.getParamaters("filedesc");
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -113,7 +112,27 @@ public class TableServletFormater extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ReadExcelClass exel = new ReadExcelClass();
+    exel.getRead();
+        
+        ArrayList<String> list = new ArrayList<String>();
+      
+    for (int i = 0; i < exel.getList().size(); i++) {
+                   
+                
+        list.add(exel.getList().get(i));
+        
+              
+            }    
+    
+    
+    
+        request.setAttribute("arrayFile", list);
+        //request.setAttribute("nameFile", FileName.getFileName() );
+        exel.resetList();
+        getServletContext().getRequestDispatcher("/Pages/TableShaper.jsp").forward(request, response);
+       // request.getRequestDispatcher("/Pages/TableShaper.jsp").forward(request, response);        
+//processRequest(request, response);
     }
 
     /**
