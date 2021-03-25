@@ -15,9 +15,10 @@ import java.util.ArrayList;
  * @author NEVM PC
  */
 public class  CellT {
-    private String Value; 
     private int id;
-    
+    private String Value; 
+    private String Possion;
+    private String Hieght;
 
     public CellT() {
     }
@@ -36,6 +37,21 @@ public class  CellT {
         this.Value = value;
     }
     
+    public String getHieght() {
+        return Hieght;
+    }
+
+    public void setHieght(String hieght) {
+        this.Hieght = hieght;
+    }
+    
+    public String getPossion() {
+        return Possion;
+    }
+
+    public void setPossion(String possion) {
+        this.Possion = possion;
+    }
     
 
 

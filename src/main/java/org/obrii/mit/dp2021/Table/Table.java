@@ -18,7 +18,8 @@ public class  Table implements Serializable {
     private ArrayList<SheetT> Sheets = new ArrayList<SheetT>(); 
     private int id;
     private String name;
-
+    private int Max;
+    
     public Table() {
     }
 
@@ -54,7 +55,13 @@ public class  Table implements Serializable {
     }
     
     
+public int getMax() {
+        return Max;
+    }
 
+    public void setMax(int max) {
+        this.Max = max;
+    }
 
     public int getId() {
         return id;

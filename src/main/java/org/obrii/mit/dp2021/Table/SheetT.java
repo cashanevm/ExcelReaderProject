@@ -22,7 +22,7 @@ public class  SheetT implements Serializable {
     public SheetT() {
     }
 
-    public SheetT(int id) {
+    public SheetT(int id,String name) {
         this.id = id;
         
         

@@ -32,32 +32,22 @@
     <body>
         <h1>Hello World!</h1>
         
-        <table>
+        
         
           <%
    
     
-        List<String> dataList = (List<String>) request.getAttribute("arrayFile");
-for(String data:dataList) {
-                
-    
-    %><tr><%=data%>
-            
-                
-                
-             </tr><%     
-            }
+       
+ 
        
        
-       
-       
-   
+   String data = (String) request.getAttribute("table");
    
    %>
        
         
+        <%=data%>
         
-        </table>
        
         <form action="<%=request.getContextPath()%>/new" method="get">
             <input type="submit">

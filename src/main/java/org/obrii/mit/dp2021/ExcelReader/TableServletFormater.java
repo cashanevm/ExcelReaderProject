@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.obrii.mit.dp2021.FileReader.FileName;
 import org.obrii.mit.dp2021.ExcelReader.ReadExcelClass;
+import org.obrii.mit.dp2021.Table.Table;
 //import manilo.files.grouptasktest.FileName;
 //import org.obrii.mit.dp2021.readmerged.ReadExcelClass;
 /**
@@ -28,7 +29,7 @@ import org.obrii.mit.dp2021.ExcelReader.ReadExcelClass;
 @WebServlet(name = "new", urlPatterns = {"/new"})
 public class TableServletFormater extends HttpServlet {
  
-    
+    ReadExcelClass exel = new ReadExcelClass();
  
  /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -96,9 +97,12 @@ public class TableServletFormater extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/Pages/TableShaper").forward(request, response);
+          request.setAttribute("table", exel.tableFormater(exel.getTable()));
+        getServletContext().getRequestDispatcher("/Pages/TableShaper_1.jsp").forward(request, response);
         //Part filePart = request.getParamaters("filedesc");
         //processRequest(request, response);
+        
+      
     }
 
     /**
@@ -112,7 +116,7 @@ public class TableServletFormater extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ReadExcelClass exel = new ReadExcelClass();
+        
     exel.getRead();
         
         ArrayList<String> list = new ArrayList<String>();
@@ -127,6 +131,8 @@ public class TableServletFormater extends HttpServlet {
     
     
     
+    
+        
         request.setAttribute("arrayFile", list);
         //request.setAttribute("nameFile", FileName.getFileName() );
         exel.resetList();
