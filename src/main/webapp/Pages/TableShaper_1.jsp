@@ -4,6 +4,7 @@
     Author     : NEVM PC
 --%>
 
+<%@page import="org.obrii.mit.dp2021.FileReader.FileName"%>
 <%@page import="java.util.List"%>
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +15,7 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><%=FileName.getFileName()%></title>
         
         <style>
    TABLE {
@@ -30,7 +31,7 @@
         
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1><%=FileName.getFileName()%></h1>
         
         
         
