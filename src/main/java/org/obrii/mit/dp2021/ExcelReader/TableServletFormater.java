@@ -97,7 +97,53 @@ public class TableServletFormater extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          request.setAttribute("table", exel.tableFormater(exel.getTable()));
+          
+        exel.setUrl(request.getContextPath());
+        //request.getAttribute("row");
+        //request.getAttribute("pos");
+        //request.getAttribute("value");
+        System.out.println(request.getParameter("row"));
+        System.out.println(request.getParameter("pos"));
+        System.out.println(request.getParameter("value"));
+        String check = request.getParameter("row");
+        if(check!=null){
+        
+        Table newtable = exel.getTable();
+
+     //System.out.println("_____________________________________________________________");
+    
+     
+     for(int i =0 ; i< newtable.getSheetList().size();i++){
+         //System.out.println("_____________________________________________________________"); 
+         for(int h =0 ; h< newtable.getSheetList().get(i).getRowList().size();h++){
+             //System.out.println("_____________________________________________________________"); 
+             
+             if(h == Integer.parseInt(request.getParameter("row"))){
+             for(int j =0 ; j< newtable.getSheetList().get(i).getRowList().get(h).getCellList().size();j++){
+                
+                 if(newtable.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getPossion().equals(request.getParameter("pos"))){
+                 newtable.getSheetList().get(i).getRowList().get(h).getCellList().get(j).setValue(request.getParameter("value"));
+                 
+                 
+                 }
+                 //System.out.println(newtable.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getHieght());
+          
+                
+                
+          
+          }
+         }
+          }
+     
+     exel.setTable(newtable);
+     }
+
+}
+
+        
+
+
+        request.setAttribute("table", exel.tableFormater(exel.getTable()));
         getServletContext().getRequestDispatcher("/Pages/TableShaper_1.jsp").forward(request, response);
         //Part filePart = request.getParamaters("filedesc");
         //processRequest(request, response);
