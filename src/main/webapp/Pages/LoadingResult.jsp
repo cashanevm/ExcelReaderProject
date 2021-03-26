@@ -9,31 +9,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>DataBase Operations</title>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/PagesRes/MainPage/css/style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
-       
+    <div class="mainPage">
+        <div class="smallCBox"><img class="smallC" src="../img/smallCirc.png" alt=""></div>
+        <div class="container">
+            <div class="contentResult">
+                <h1>Ви успішно зберегли файл <span> "<%=
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <h1>You have successfully saved the file "<%=
-        
-        request.getAttribute("nameFile")
-        
-        %>" to the database 
-        
-        </h1>
-        <form action="<%=request.getContextPath()%>/">
-         <input type="submit" value="to the main page">
-        </form>
-        
-    </body>
+                    request.getAttribute("nameFile")
+                    
+                    %>" </span>у базі даних.</h1>
+                    <form action="<%=request.getContextPath()%>/">
+                    <input type="submit" value="На головну">
+                </form>
+            </div>
+        </div>
+        <img class="bigCRes" src="../img/bigCirc.png" alt="">
+    </div>
+</body>
 </html>
