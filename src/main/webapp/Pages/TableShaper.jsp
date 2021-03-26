@@ -4,6 +4,7 @@
     Author     : NEVM PC
 --%>
 
+<%@page import="org.obrii.mit.dp2021.Table.Table"%>
 <%@page import="org.obrii.mit.dp2021.FileReader.FileName"%>
 <%@page import="java.util.List"%>
 <%@page import="java.lang.String"%>
@@ -33,38 +34,40 @@
     <body>
         <h1><%=FileName.getFileName()%></h1>
         
-        <table>
-        
-          <%
+        <%
    
     
-        List<String> dataList = (List<String>) request.getAttribute("arrayFile");
-for(String data:dataList) {
-                
-    
-    %><tr><%=data%>
-            
-                
-                
-             </tr><%     
-            }
+       
+ 
        
        
-       
-       
-   
+   String data = (String) request.getAttribute("table");
    
    %>
        
         
-        
-        </table>
+        <%=data%>
        
         <form action="<%=request.getContextPath()%>/new" method="get">
-            <input type="submit">
+            <input type="submit" value="edit">
             
             
             
+        </form>
+            <%
+            
+                //Table datainfo = (Table) request.getAttribute("tableInfo");
+           // System.out.println(datainfo.getName());
+            //request.setAttribute("tableInfoMain", datainfo);
+            %>
+            
+            
+            
+         <form action="<%=request.getContextPath()%>/Receive" method="get">
+         <input type="submit" value="send">
+        </form>
+         <form action="<%=request.getContextPath()%>/Pages/LoadingFile.jsp">
+         <input type="submit" value="upload another file">
         </form>
          
     </body>

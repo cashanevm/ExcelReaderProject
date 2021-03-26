@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.obrii.mit.dp2021.FileReader.FileName;
 import org.obrii.mit.dp2021.ExcelReader.ReadExcelClass;
@@ -29,7 +30,7 @@ import org.obrii.mit.dp2021.Table.Table;
 @WebServlet(name = "new", urlPatterns = {"/new"})
 public class TableServletFormater extends HttpServlet { 
     ReadExcelClass exel = new ReadExcelClass();
-   
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {          
@@ -37,9 +38,10 @@ public class TableServletFormater extends HttpServlet {
                 //System.out.println(request.getParameter("row"));
                 //System.out.println(request.getParameter("pos"));
                 //System.out.println(request.getParameter("value"));
+                Table newtable = exel.getTable();
                 String check = request.getParameter("row");
                 if(check!=null){                    
-                    Table newtable = exel.getTable();
+                    
                     for(int i =0 ; i< newtable.getSheetList().size();i++){         
                         for(int h =0 ; h< newtable.getSheetList().get(i).getRowList().size();h++){                        
                             if(h == Integer.parseInt(request.getParameter("row"))){
@@ -51,24 +53,38 @@ public class TableServletFormater extends HttpServlet {
                                 }
                             }
                         }     
-                        exel.setTable(newtable);
+                        
                     }
-                }        
-                request.setAttribute("table", exel.tableFormater(exel.getTable()));
+                }
+                exel.setTable(newtable);
+                request.setAttribute("table", exel.tableFormater(exel.getTable(),true));
                 getServletContext().getRequestDispatcher("/Pages/TableShaper_1.jsp").forward(request, response);                              
             }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
-                exel.getRead();        
-                ArrayList<String> list = new ArrayList<String>();      
-                for (int i = 0; i < exel.getList().size(); i++) {                                    
-                    list.add(exel.getList().get(i));                      
-                }                                        
-                request.setAttribute("arrayFile", list);
+                HttpSession session = request.getSession();
+                //Table tableInfo = (Table) session.getAttribute("tableInfo");      
+               
+                if(request.getParameter("canRead")==null){
+                exel.getRead();
+                }
+                
+
+
+
+                //ArrayList<String> list = new ArrayList<String>();      
+                //for (int i = 0; i < exel.getList().size(); i++) {                                    
+                 //   list.add(exel.getList().get(i));                      
+                //}                                        
+                //request.setAttribute("arrayFile", list);
                 //request.setAttribute("nameFile", FileName.getFileName() );
-                exel.resetList();
+                //exel.resetList();
+                request.setAttribute("table", exel.tableFormater(exel.getTable(),false));
+               
+                 session.setAttribute("tableInfo", exel.getTable());
+                //request.setAttribute(, );
                 getServletContext().getRequestDispatcher("/Pages/TableShaper.jsp").forward(request, response);
                 // request.getRequestDispatcher("/Pages/TableShaper.jsp").forward(request, response);        
                 //processRequest(request, response);

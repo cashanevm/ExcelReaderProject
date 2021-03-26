@@ -13,7 +13,6 @@
     </head>
     <body>
        
-        <>
         
         
         
@@ -24,6 +23,17 @@
         
         
         
-        <h1>Hello World!</h1>
+        
+        <h1>You have successfully saved the file "<%=
+        
+        request.getAttribute("nameFile")
+        
+        %>" to the database 
+        
+        </h1>
+        <form action="<%=request.getContextPath()%>/">
+         <input type="submit" value="to the main page">
+        </form>
+        
     </body>
 </html>

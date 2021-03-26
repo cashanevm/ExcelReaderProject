@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.obrii.mit.dp2021.FileReader.FileName;
 import org.obrii.mit.dp2021.Table.CellT;
 import org.obrii.mit.dp2021.Table.RowT;
 import org.obrii.mit.dp2021.Table.SheetT;
@@ -28,7 +29,7 @@ static Table tableMain = new Table();
 static ArrayList<String> VAL = new ArrayList<>();
 static ArrayList<String> POS = new ArrayList<>();
 static ArrayList<String> HIE = new ArrayList<>();
-static ArrayList<String> TableList = new ArrayList<>();
+//static ArrayList<String> TableList = new ArrayList<>();
 static ArrayList<String> HeightList = new ArrayList<>();
 
 
@@ -111,34 +112,25 @@ public static void ReadExcel(){
         HeightList.add("1");
     }
     //mainProgram
-    Table table = new Table(0,"Name");
+    Table table = new Table(0,FileName.getFileName());
     table.setMax(max);
-    try {
-        
-        
-        
-        
+    try {                                
         //C:\\Users\\NEVM PC\\Documents\\NetBeansProjects\\
         file = new FileInputStream( new File("file"));
-       System.out.println(new File("file").getName()); 
-//file = new FileInputStream(new File("C:\\Users\\NEVM PC\\Documents\\NetBeansProjects\\ReadMerged\\Excel.xlsx"));
+        System.out.println(new File("file").getName()); 
+        //file = new FileInputStream(new File("C:\\Users\\NEVM PC\\Documents\\NetBeansProjects\\ReadMerged\\Excel.xlsx"));
         //Create Workbook instance holding reference to .xlsx file
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
-        
-//Get first/desired sheet from the workbook
+        XSSFWorkbook workbook = new XSSFWorkbook(file);        
+        //Get first/desired sheet from the workbook
         Iterator<Sheet> sheets = workbook.sheetIterator();
-        //sheet
-        
-        
-        
+        //sheet                        
         int shN = 0;
-        while(sheets.hasNext()){
-        
+        while(sheets.hasNext()){        
         Sheet sh = sheets.next();
         SheetT sheet = new SheetT(shN,sh.getSheetName());
         Iterator<Row> rowIterator = sh.iterator();
         int rowN = 0;
-        TableList.add("<td rowspan='1' colspan='"+ String.valueOf(max)+ "' class=\"\">"+ sh.getSheetName()+"</td>");
+        //TableList.add("<td rowspan='1' colspan='"+ String.valueOf(max)+ "' class=\"\">"+ sh.getSheetName()+"</td>");
         //rows
         
             while (rowIterator.hasNext()) {
@@ -241,7 +233,9 @@ public static void ReadExcel(){
                 VAL.clear();
                 POS.clear();
                 HIE.clear();
-                TableList.add(rowFormater(rowN,intRow ,stringRow , intMarg ,stringMarg , max,colMargEnd,rowMargEnd ,rowNull, rowNullNum));                
+                //TableList.add(
+                        rowFormater(rowN,intRow ,stringRow , intMarg ,stringMarg , max,colMargEnd,rowMargEnd ,rowNull, rowNullNum);
+                //);                
                 for(int i=0; i<POS.size();i++ ){
                     CellT cellt = new CellT(i);  
                     cellt.setValue(VAL.get(i));
@@ -277,7 +271,7 @@ public static void ReadExcel(){
     }                
 }
 //ROW FORMATER METHOD//
-public static String  rowFormater(int rowN,ArrayList<String> cellNum ,ArrayList<String> cellValue , ArrayList<String> margNum ,ArrayList<String> margValue, int rowSize,ArrayList<String> sellMargeEnd ,ArrayList<String> rowMargeEnd,ArrayList<String> rowNull,ArrayList<String> rowNullNum ){
+public static void  rowFormater(int rowN,ArrayList<String> cellNum ,ArrayList<String> cellValue , ArrayList<String> margNum ,ArrayList<String> margValue, int rowSize,ArrayList<String> sellMargeEnd ,ArrayList<String> rowMargeEnd,ArrayList<String> rowNull,ArrayList<String> rowNullNum ){
     //ROW`S Value//
     ArrayList<String> mainValue = new ArrayList<String>();
     //ROW`S Value ID//
@@ -442,41 +436,41 @@ public static String  rowFormater(int rowN,ArrayList<String> cellNum ,ArrayList<
         HIE.add(heightPossion.get(i));
     }      
     //STRING FORMATER//
-    for(int i=0;i<usedPossion.size();i++){
-        for(int h=0;h<mainPossion.size();h++){          
-            usedPossion.get(i);        
-            }        
-            try{                        
-                if(mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("none")){
-                if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
-                    } else{
-                    if(    mainValue.get(mainPossion.indexOf(usedPossion.get(usedPossion.size()-1))).equals("none")         ){}else{
-                    tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+ ""  +"</td>";                
-                }
-                    }
-                    
-                  //tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizeSell+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                
-                     
-                }
-                else if(mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("null")||mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("")||mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("none")){
-                    if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
-                    }                
-                    else 
-                        if(Integer.parseInt(listH.get(mainPossion.indexOf(usedPossion.get(i))))== 1){
-                        tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                
-                    }
-                    else{
-                    }
-            
-                    }            
-                else{
-                    tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";
-                }
-            }
-            catch(Exception e){
-            }
-            sizeSell=0;        
-    }     
+//    for(int i=0;i<usedPossion.size();i++){
+//        for(int h=0;h<mainPossion.size();h++){          
+//            usedPossion.get(i);        
+//            }        
+//            try{                        
+//                if(mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("none")){
+//                if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
+//                    } else{
+//                    if(    mainValue.get(mainPossion.indexOf(usedPossion.get(usedPossion.size()-1))).equals("none")         ){}else{
+//                    tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+ ""  +"</td>";                
+//                }
+//                    }
+//                    
+//                  //tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizeSell+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                
+//                     
+//                }
+//                else if(mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("null")||mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("")||mainValue.get(mainPossion.indexOf(usedPossion.get(i))).equals("none")){
+//                    if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
+//                    }                
+//                    else 
+//                        if(Integer.parseInt(listH.get(mainPossion.indexOf(usedPossion.get(i))))== 1){
+//                        tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                
+//                    }
+//                    else{
+//                    }
+//            
+//                    }            
+//                else{
+//                    tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizePos.get(i)+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";
+//                }
+//            }
+//            catch(Exception e){
+//            }
+//            sizeSell=0;        
+//    }     
     //DIAGNOSTIC//
     //    System.out.println("used");
 //for(int i=0;i<usedPossion.size();i++){
@@ -547,7 +541,7 @@ public static String  rowFormater(int rowN,ArrayList<String> cellNum ,ArrayList<
    // System.out.println("mainPossion");for(int i=0;i<mainPossion.size();i++){System.out.println(mainPossion.get(i));}
     
   //  System.out.println("mainValue");for(int i=0;i<mainValue.size();i++){System.out.println(mainValue.get(i));}    
-    return tableRow; 
+    //return tableRow; 
 }
 
 //RETURN TO SERVLET METHOD//
@@ -556,7 +550,8 @@ public void getRead(){
 }
 
 public ArrayList<String> getList(){
-    return TableList;
+    ArrayList<String>  w = new ArrayList<String>();
+    return w;
 }
 //GET HIEGHT HELPER LIST
 public static ArrayList<String> getHeight(){    
@@ -578,7 +573,7 @@ public static void  setHeight(ArrayList<String> list){
 }
 
 public void resetList(){
-  TableList.clear();
+//  TableList.clear();
 }
 
 public Table getTable() {
@@ -597,7 +592,7 @@ public static void setUrl(String string) {
     ReadExcelClass.URL = string;
 }
 
-public static String  tableFormater(Table table){
+public static String  tableFormater(Table table, boolean canWrite){
     ArrayList<String> mainPossion = new ArrayList<>();
     ArrayList<String> mainValue = new ArrayList<>();
     ArrayList<String> heightPossion = new ArrayList<>();
@@ -608,7 +603,7 @@ public static String  tableFormater(Table table){
     }    
     String TableBody = "<table>";
     for(int i =0 ; i< table.getSheetList().size();i++){
-        TableBody = TableBody +"<td rowspan='1' colspan='"+ String.valueOf(table.getMax())+ "' class=\"\">"+ table.getSheetList().get(i).getName()+"</td>";              
+        TableBody = TableBody +"<td rowspan='1' colspan='"+ String.valueOf(table.getMax())+ "' >"+ table.getSheetList().get(i).getName()+"</td>";              
         for(int h =0 ; h< table.getSheetList().get(i).getRowList().size();h++){
             TableBody = TableBody + "<tr>";
                 for(int j =0 ; j< table.getSheetList().get(i).getRowList().get(h).getCellList().size();j++){
@@ -685,13 +680,26 @@ public static String  tableFormater(Table table){
                             if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
                             }                
                             else if(Integer.parseInt(listH.get(mainPossion.indexOf(usedPossion.get(k))))== 1){
-                                TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">         "+ "<form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""+ mainValue.get(mainPossion.indexOf(usedPossion.get(k))) +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form></td>";                
+                                TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">         ";
+                                if(canWrite){
+                                    TableBody = TableBody + "<form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""+ mainValue.get(mainPossion.indexOf(usedPossion.get(k))) +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";                              
+                                }
+                                else{
+                                    TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
+                                }                                                                                                                
+                                TableBody = TableBody +  "</td>";                
                             }
                             else{
                             }            
                         }            
-                        else{
-                            TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">"+ " <form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form></td>";
+                        else{                            
+                            TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">";
+                            if(canWrite){
+                                TableBody = TableBody + " <form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";
+                            }else{
+                                TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
+                            }                             
+                            TableBody = TableBody + "</td>";
                         }
                     }
                     catch(Exception e){

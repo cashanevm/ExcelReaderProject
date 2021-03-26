@@ -50,8 +50,9 @@
         <%=data%>
         
        
-        <form action="<%=request.getContextPath()%>/new" method="get">
-            <input type="submit">
+        <form action="<%=request.getContextPath()%>/new" method="post">
+            <input type="hidden" name="canRead" value="false">
+            <input type="submit" value="save">
             
             
             

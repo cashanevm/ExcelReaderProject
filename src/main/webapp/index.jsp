@@ -13,7 +13,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="<%=request.getContextPath()%>/Pages/LoadingFile.jsp">Load</a>
+       <form action="<%=request.getContextPath()%>/Pages/LoadingFile.jsp">
+         <input type="submit" value="upload file">
+        </form>
         
     </body>
 </html>
