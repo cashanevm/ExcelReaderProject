@@ -1,0 +1,219 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    font-family: 'Roboto', sans-serif;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* _______________________ */
+
+.mainPage {
+    height: 100vh;
+    background-image: url("../img/back.png");
+    overflow: hidden;
+}
+
+.smallC {
+    float: right;
+    right: 20px;
+    margin-right: -10%;
+    margin-top: -11%;
+}
+
+.bigC {
+    float: left;
+    margin-left: -37%;
+    margin-top: -46%;
+}
+
+.container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 59px;
+    margin-top: 16%;
+}
+
+.title span {
+    color: rgba(0, 82, 212, 0.93);
+}
+
+.blocks {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8%;
+    justify-content: space-between;
+    color: white;
+}
+
+.process {
+    width: 29%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(36px);
+    padding: 2.5% 1.5%;
+    text-align: center;
+    border: 1, 2px solid linear-gradient(222.39deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 8px;
+}
+
+.process h2 {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: left;
+}
+
+.process p {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    margin-top: 10%;
+    text-align: left;
+}
+
+.process input {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 20px;
+    color: white;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(200px);
+    border-radius: 8px;
+    border: none;
+    margin-top: 10%;
+    width: 100%;
+    height: 6vh;
+}
