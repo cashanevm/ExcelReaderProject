@@ -22,6 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/PagesRes/TableDisplay/style/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/PagesRes/TableDisplay/style.css">
         
         <style>
    table {
@@ -84,11 +85,12 @@ text-align: left;
             </section>
             <section class="gohome__btn">
                 <form action="<%=request.getContextPath()%>/new" method="post" class="home__page-link">
+                    <input type="hidden" name="canRead" value="cannot">
                     <input type="submit" value="Зберегти" class="home__page-wrapper">
                 </form>
             </section>
         </div>
     </div>
-
+<script src="<%=request.getContextPath()%>/PagesRes/TableDisplay/main.js"></script>
 </body>
 </html>

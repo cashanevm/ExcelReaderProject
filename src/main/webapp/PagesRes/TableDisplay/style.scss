@@ -1,0 +1,33 @@
+.form {
+	&__input {
+		height: 30px;
+	}
+
+	&__input-container {
+		display: inline-block;
+		position: relative;
+	}
+
+	&__btn {
+		cursor: pointer;
+		background: none;
+		border: none;
+		height: 100%;
+	}
+
+	&__btn-container {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		&--visible {
+			display: block;
+		}
+	}
+
+	&__btn-icon {
+		height: 50%;
+	}
+}
