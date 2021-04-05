@@ -37,8 +37,8 @@
                 </div>
                 <div class="process">
                     <h2>Процес 2</h2>
-                    <p>В розробці...</p>
-                    <form action="/ExcelReaderProject/Pages/LoadingFile.jsp">
+                    <p>Перегляд таблиць, які добавлені в базу</p>
+                    <form action="<%=request.getContextPath()%>/BaseTables">
                         <input type="submit" value="Обрати">
                     </form>
                 </div>

@@ -50,7 +50,7 @@ forms.forEach(function (form) {
 	});
 
 	submitBtn.addEventListener('click', function (event) {
-                   //event.preventDefault();
+                    //event.preventDefault();
 		formState.initialValue = input.value;
 		// request (fetchAPI / asynchronous)
 		console.log('submitting...');

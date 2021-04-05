@@ -28,7 +28,7 @@ import org.obrii.mit.dp2021.Table.Table;
  * @author NEVM PC
  */
 @WebServlet(name = "new", urlPatterns = {"/new"})
-public class TableServletFormater extends HttpServlet { 
+public class TableFormaterServlet extends HttpServlet { 
     ReadExcelClass exel = new ReadExcelClass();
     
     @Override

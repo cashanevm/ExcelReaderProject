@@ -12,6 +12,7 @@
   background: none;
   border: none;
   height: 100%;
+  min-height: 40px;
 }
 
 .form__btn-container {

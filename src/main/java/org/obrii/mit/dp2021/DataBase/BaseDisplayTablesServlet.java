@@ -7,20 +7,22 @@ package org.obrii.mit.dp2021.DataBase;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.obrii.mit.dp2021.Table.Table;
 
 /**
  *
  * @author NEVM PC
  */
-@WebServlet(name = "DataBaseReceive", urlPatterns = {"/Receive"})
-public class DataBaseReceive extends HttpServlet {
+@WebServlet(name = "BaseDisplayTablesServlet", urlPatterns = {"/BaseTables"})
+public class BaseDisplayTablesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,18 +47,30 @@ public class DataBaseReceive extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                
-                
-             HttpSession session = request.getSession();
-                Table tableInfo = (Table) session.getAttribute("tableInfo");     
+        ArrayList<String> TablesName = new ArrayList<String>();
+        DataStore dataTables = null;
+        try {
+            dataTables = new DataStore();
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDisplayTablesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            for(int i = 0; i<dataTables.GetTablesNames().size();i++){
+                TablesName.add(dataTables.GetTablesNames().get(i));
+            
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(BaseDisplayTablesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
-        //Table table = new Table();
-        //table = (Table) request.getAttribute("tableInfoMain");
-           
-       
-        request.setAttribute("nameFile", tableInfo.getName());
-        getServletContext().getRequestDispatcher("/Pages/LoadingResult.jsp").forward(request, response);
+        
+        
+        
+        request.setAttribute("nameTables", TablesName);
+        getServletContext().getRequestDispatcher("/Pages/DataBaseTables.jsp").forward(request, response);
     }
 
     /**
@@ -71,14 +85,6 @@ public class DataBaseReceive extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession();
-                Table tableInfo = (Table) session.getAttribute("tableInfo");     
-        
-        
-        //Table table = new Table();
-        //table = (Table) request.getAttribute("tableInfoMain");
-           
-        System.out.println(tableInfo.getName()); 
     }
 
     /**
