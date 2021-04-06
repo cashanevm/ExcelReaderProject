@@ -21,7 +21,11 @@ public class  SheetT implements Serializable {
 
     public SheetT() {
     }
-
+ public SheetT(String Name) {
+        
+        this.name = Name;
+        
+    }
     public SheetT(int id,String Name) {
         this.id = id;
         this.name = Name;

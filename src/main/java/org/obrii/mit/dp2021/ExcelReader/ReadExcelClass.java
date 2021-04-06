@@ -612,6 +612,11 @@ public static String  tableFormater(Table table, boolean canWrite){
                     mainValue.add(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue());
                     heightPossion.add(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getHieght());                 
                 }                                                                             
+                
+
+
+
+
                 //SET HEIGHT TO GLOBAL//
                 for(int v=0;v<heightPossion.size();v++){
                     if(Integer.parseInt(heightPossion.get(v))>1){                    

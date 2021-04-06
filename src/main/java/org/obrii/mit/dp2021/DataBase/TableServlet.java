@@ -8,7 +8,6 @@ package org.obrii.mit.dp2021.DataBase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,14 +15,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.obrii.mit.dp2021.ExcelReader.ReadExcelClass;
 
 /**
  *
  * @author NEVM PC
  */
-@WebServlet(name = "BaseDisplayTablesServlet", urlPatterns = {"/BaseTables"})
-public class BaseDisplayTablesServlet extends HttpServlet {
-
+@WebServlet(name = "TableServlet", urlPatterns = {"/Table"})
+public class TableServlet extends HttpServlet {
+ReadExcelClass exel = new ReadExcelClass();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +33,7 @@ public class BaseDisplayTablesServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
+  
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,31 +47,25 @@ public class BaseDisplayTablesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<String> TablesName = new ArrayList<String>();
-        ArrayList<String> TablesId = new ArrayList<String>();
+                
         DataStore dataTables = null;
         try {
             dataTables = new DataStore();
         } catch (SQLException ex) {
             Logger.getLogger(BaseDisplayTablesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         try {
-            for(int i = 0; i<dataTables.GetTablesNames().size();i++){
-                TablesName.add(dataTables.GetTablesNames().get(i));
-                
-            }
-            
+            request.setAttribute("table", exel.tableFormater(dataTables.GetTableFromBase(Integer.parseInt(dataTables.GetTablesId(request.getParameter("tableName")))),false)); 
             
         } catch (SQLException ex) {
-            Logger.getLogger(BaseDisplayTablesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TableServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+           
+        getServletContext().getRequestDispatcher("/Pages/TableShaper_2.jsp").forward(request, response);  
         
-        
-        
-        
-        request.setAttribute("idTables", TablesName);
-        request.setAttribute("nameTables", TablesName);
-        getServletContext().getRequestDispatcher("/Pages/DataBaseTables.jsp").forward(request, response);
     }
 
     /**
@@ -85,7 +79,7 @@ public class BaseDisplayTablesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       
     }
 
     /**

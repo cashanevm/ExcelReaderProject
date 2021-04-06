@@ -49,6 +49,23 @@ public class  Table implements Serializable {
         }
         return null;
     }
+    
+    
+    public SheetT getSheet(String name) {
+        for(int i = 0; i<Sheets.size();i++){
+            if(name.equals(Sheets.get(i).getName())){
+            
+                return Sheets.get(i);
+            
+            
+            }
+            
+        
+        }
+        return null;
+    }
+    
+    
 
     public void setSheet(SheetT sheet) {
         this.Sheets.add(sheet);

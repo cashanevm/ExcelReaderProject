@@ -28,12 +28,17 @@
         <%for(String data:dataList){%>
         
            <p><%=data%></p>
-           
+           <form action="<%=request.getContextPath()%>/Table">
+               <input type="hidden" name="tableName" value="<%=data%>">  
+                    <input type="submit" value="Переглянути">
+                    </form>
            <%
         
             }
         
         %>
-        
+        <form action="<%=request.getContextPath()%>/" method="get" class="home__page-link">
+                    <input type="submit" value="На головну" class="home__page-wrapper">
+                </form>
     </body>
 </html>
