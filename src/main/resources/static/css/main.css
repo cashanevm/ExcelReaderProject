@@ -1,0 +1,215 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+.add-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    margin: 5% auto;
+}
+
+
+.add-form input{
+    border: none;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-top: 3px solid white;
+    color: white;
+    padding: 18px 18px;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: box 1s;
+    animation-play-state: paused;
+
+} 
+.add-form input:hover{
+    animation-play-state: running;
+
+}
+
+@keyframes box {
+    from { 
+        border: 1px solid rgba(255, 255, 255, 0);
+        border-top: 3px solid white;
+     
+    }
+
+   
+        to { border: 1px solid white;
+        border-top: 3px solid white; }
+   }
+
+
+.add-form input::placeholder{
+    color: white;
+
+}
+
+body{
+    background: url(../back.jpg);
+}
+label{
+     font-family: 'Roboto', sans-serif;
+    margin: 15px 0;
+    color: white;
+    font-size: 35px;
+}
+
+.add-form__lable{
+    color: white;
+    font-size: 20px;
+}
+.add-form input[type="range"] {
+    color: white;
+  }
+
+
+  input[type=range] {
+    -webkit-appearance: none;
+    margin: 20px 0;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 12.8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    background: white;
+    border-radius: 25px;
+    border: 0px solid #000101;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 0px solid #000000;
+    height: 20px;
+    width: 39px;
+    border-radius: 7px;
+    background: white;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -3.6px;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+     background: #bbbbbb; 
+  }
+ 
+
+  /*--- Button 2 -------*/
+
+
+.btn-2::before, .btn-2::after{
+    transition-delay: 0s;
+  }
+  .btn-2 span::before, .btn-2 span::after{
+    transition-delay: 0.2s;
+  }
+  .btn-2::before{
+    right: 0;
+    top: 0;
+  }
+  .btn-2::after{
+    left: 0;
+    bottom: 0;
+  }
+  .btn-2 span::before{
+    left: 0;
+    top: 0;
+  }
+  .btn-2 span::after{
+    right: 0;
+    bottom: 0;
+  }
+  .btn-2:hover::before, .btn-2:hover::after{
+    transition-delay: 0.2s;
+  }
+  .btn-2:hover span::before, .btn-2:hover span::after{
+    transition-delay: 0s;
+  }
+  
+  *, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  button{
+    display: inline-block;
+    position: relative;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 20px 30px;
+    background: rgba(0,0,0,0.09);
+  }
+  span{
+    display: block;
+    padding: 25px 80px;
+  }
+  button::before, button::after{
+    content:"";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    transition: all 0.2s linear;
+    background: #fff;
+  }
+  
+  span::before, span::after{
+    content:"";
+    width:2px;
+    height:0;
+    position: absolute;
+    transition: all 0.2s linear;
+    background: #fff;
+  }
+  button:hover::before, button:hover::after{
+    width: 100%;
+  }
+  button:hover span::before, button:hover span::after{
+    height: 100%;}
+
+    .rad{
+        display: flex;
+        
+    }
+    .rad input{
+        width : 30px;
+        height: 30px;
+        margin: 0 20px;
+
+}
+    
+input[type=color]{
+width: 100%;
+height: 36px;
+padding: 0 18px;
+}
+
+
+TABLE {
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+    width: 95%;
+    text-shadow: 1px 1px 2px black;
+    color: white;
+    border-collapse: collapse; /* Убираем двойные границы между ячейками */
+    background: rgba(0, 0, 0, 0.2); /* Цвет фона таблицы */
+    border: 4px solid white; /* Рамка вокруг таблицы */
+   }
+   TD, TH {
+    padding: 5px; /* Поля вокруг текста */
+    border: 2px solid white; /* Рамка вокруг ячеек */}
+   
+    h2{
+        padding: 10px 20px;
+        font-size: 35px;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+
+    }
+    .error{
+        color: red;
+        
+    }
