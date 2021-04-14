@@ -170,11 +170,25 @@ label{
   button:hover span::before, button:hover span::after{
     height: 100%;}
 
-    .rad{
+  @media (max-width: 900px) { 
+   .rad{
+        display: flex;
+        flex-direction: column;
+        
+    }
+  }
+    @media (min-width: 900px) {
+     .rad{
         display: flex;
         
     }
+    }
+  
+  
+   
     .rad input{
+        min-width : 25px;
+        min-height: 25px;
         width : 30px;
         height: 30px;
         margin: 0 20px;
