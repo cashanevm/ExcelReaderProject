@@ -8,14 +8,14 @@ and open the template in the editor.
     <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nevm main</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" th:href="@{css/reset.css}">
+        <link rel="stylesheet" th:href="@{css/reset.css}"> 
         <link rel="stylesheet" th:href="@{css/main.css}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">    
     </head>
     <body style="min-width: 930px;">
-        <div th:switch="${users}">
+        <div th:switch="${students}">
     <h2 th:case="null">No users yet!</h2>
         <div th:case="*" >
             <h2>Users</h2>
@@ -24,39 +24,25 @@ and open the template in the editor.
                     <tr>
                         <th>Name</th>
                         
-                        <th>Surname</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Sex</th>
-                        <th>Language</th>
-<!--                        <th>tell</th>-->
-                        <th>Color</th>
-                        <th>DoB</th>
-                        <th>Time</th>
-                        <th>Attempts</th>
-                        <th>Aspiration</th>
+                        <th>href</th>
+                        <th>age</th>
+                  
+                
                         
 <!--                        <th>Edit</th>
                         <th>Delete</th>-->
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.name}"></td>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.href}"></td>
                     
-                     <td th:text="${user.secname}"></td>
-                    <td th:text="${user.pass}"></td>
-                    <td th:text="${user.email}"></td>
-                     <td th:text="${user.radio}"></td>
-                    <td th:text="${user.checkbox}"></td>
-<!--                     <td th:text="${user.tell}"></td>-->
-               
-<td th:text="${user.color}">   </td>
-                     <td th:text="${user.date}"></td>
-                    <td th:text="${user.time}"></td>
-                     <td th:text="${user.number}"></td>
-                    <td th:text="${user.range}"></td>
-                    
+                     <td th:text="${student.name}"></td>
+                    <td th:text="${student.age}"></td>
+     
+                     <p ></p>
+            <p ></p>
+            <p ></p>
                     
 <!--                    <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
                     <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>-->
@@ -64,10 +50,10 @@ and open the template in the editor.
             </tbody>
         </table>
     </div>  
-    <form action="./signup">
+<!--    <form action="./signup">
         <button  type="submit" class="btn-2"><span>Add a new user</span></button> 
-    </form>  
-    <form action="./index">
+    </form>  -->
+    <form action="./getMessage">
         <button  type="submit" class="btn-2"><span>Refresh</span></button> 
     </form>
     

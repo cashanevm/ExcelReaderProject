@@ -26,6 +26,8 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
     
+    
+    
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
         return "add-user";
@@ -43,7 +45,7 @@ public class UserController {
     @GetMapping("/index")
     public String showUserList(Model model) {
         model.addAttribute("users", userRepository.findAll());
-        
+    
         return "index";
     }
     // additional CRUD methods
