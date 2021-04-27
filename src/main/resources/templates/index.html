@@ -24,10 +24,10 @@ and open the template in the editor.
                     <tr>
                         <th>Name</th>
                         
-                        <th>href</th>
+<!--                        <th>href</th>-->
                         <th>age</th>
-                  
-                
+                  <th></th>
+                <th></th>
                         
 <!--                        <th>Edit</th>
                         <th>Delete</th>-->
@@ -35,11 +35,31 @@ and open the template in the editor.
                 </thead>
                 <tbody>
                 <tr th:each="student : ${students}">
-                    <td th:text="${student.href}"></td>
+<!--                    <td th:text="${student.href}">
+                        
+                        
+                        
+                        
+                    </td>-->
                     
                      <td th:text="${student.name}"></td>
                     <td th:text="${student.age}"></td>
-     
+     <td 
+         
+        ><form action="./update" method="post">
+                <input type="hidden" name="url" th:value="${student.getHref()}">
+                <input type="text" name="name" th:value="${student.name}"/>
+                <input type="text" name="age" th:value="${student.age}"/>
+                <button id="spanR" type="submit" class="btn-2 "><span>update</span></button> 
+                
+            </form> </td>
+            <td 
+         
+        ><form action="./del" method="post">
+                <input type="hidden" name="url" th:value="${student.getHref()}">
+                <button id="spanR" type="submit" class="btn-2 "><span>del</span></button> 
+                
+            </form> </td>
                      <p ></p>
             <p ></p>
             <p ></p>
@@ -47,13 +67,28 @@ and open the template in the editor.
 <!--                    <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
                     <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>-->
                 </tr>
+                <tr>
+                    <form action="./post" method="post">
+                   <td><input type="text" name="name" /></td> 
+                     <td><input type="text" name="age" /></td> 
+                      <td colspan="2"><button id="spanR" type="submit" class="btn-2 "><span>post</span></button> </td> 
+                </form> 
+                    </tr>
             </tbody>
         </table>
-    </div>  
+    
+                
+                
+                
+                
+                
+            
+        </div>  
 <!--    <form action="./signup">
         <button  type="submit" class="btn-2"><span>Add a new user</span></button> 
     </form>  -->
-    <form action="./getMessage">
+    
+<form action="./getMessage">
         <button  type="submit" class="btn-2"><span>Refresh</span></button> 
     </form>
     

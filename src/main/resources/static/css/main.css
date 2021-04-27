@@ -227,3 +227,7 @@ TABLE {
         color: red;
         
     }
+     #spanR{
+    display: block;
+    padding: 10px 30px;
+  }

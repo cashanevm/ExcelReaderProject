@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.springframework.stereotype.Component;
 
 
 
@@ -21,7 +22,7 @@ import javax.persistence.Id;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-
+@Component
 public class Student {
             
     private long id;
@@ -40,6 +41,12 @@ public class Student {
 
     public Student() {
     }
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
 
     public long getId() {
         return id;
