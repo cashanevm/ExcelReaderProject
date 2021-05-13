@@ -136,16 +136,17 @@ public class MessageController {
                                         body.setYearFrom(Integer.parseInt(subStr1[0]));
                                         body.setYearTo(Integer.parseInt(subStr1[1]));
                                     break;
-                                    }else if(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue().contains("1. Обов'язкові навчальні дисципліни")){
+                                    }else if(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue().contains("Обов'язкові навчальні дисципліни")){
                                         boolean can = true;
                                         cellN = j;
                                         rowN = h;
-                                        while(can){
+                                        rowN++;
+                                        while(!isObject("Дисципліни вибору ВНЗ",table.getSheetList().get(i).getRowList().get(rowN).getCellList())){
                                         
-                                        
-                                        
+                                        System.out.println(table.getSheetList().get(i).getRowList().get(rowN).getCellList().get(cellN).getValue());
+                                        rowN++;
                                         }
-                                    
+                                    break;
                                     }
                                     else if(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue().contains("Декан")){
                                         cellN = table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getId();
