@@ -6,21 +6,24 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>DataBase Operations</title>
+        <link rel="stylesheet" th:href="@{css/style.css}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div>TODO write content</div>
-        <div th:switch="${students}">
-            <div th:each="student : ${students}">
-                
-                <p th:text="${student.href}"></p>
-            <p th:text="${student.name}"></p>
-            <p th:text="${student.age}"></p>
+    <div class="mainPage">
+        <div class="smallCBox"><img class="smallC" src="@{img/smallCirc.png}" alt=""></div>
+        <div class="container">
+            <div class="contentResult">
+                <h1>Ви успішно відправили <span> Post </span> запит</h1>
+                    <form action="./home">
+                    <input type="submit" value="На головну">
+                </form>
             </div>
-         
-         
-         </div>
-    </body>
+        </div>
+        <img class="bigCRes" src="@{img/bigCirc.png}" alt="">
+    </div>
+</body>
 </html>

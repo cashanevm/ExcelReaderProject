@@ -1,0 +1,9 @@
+@mixin bg-circle($size) {
+	content: "";
+	position: absolute;
+	width: $size;
+	height: $size;
+	background: linear-gradient(108.12deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 88.4%);
+	border-radius: 50%;
+	filter: blur(8px);
+}

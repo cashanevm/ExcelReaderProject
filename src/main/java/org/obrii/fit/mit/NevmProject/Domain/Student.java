@@ -8,12 +8,13 @@ package org.obrii.fit.mit.NevmProject.Domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.springframework.stereotype.Component;
-
 
 
 /**
@@ -23,13 +24,29 @@ import org.springframework.stereotype.Component;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public class Student {
+public class Student implements Serializable{
             
     private long id;
     
     private String name;
     
     private int age;
+    
+      private ArrayList<String> list = new ArrayList<>();
+     private ArrayList<Test> testlist = new ArrayList<>();
+
+    public ArrayList<Test> getTestlist() {
+        return testlist;
+    }
+
+    public void setTestlist(ArrayList<Test> testlist) {
+        this.testlist = testlist;
+    }
+
+      
+        
+        
+    
     
     @JsonProperty("_links")
     private Links links;
@@ -45,6 +62,12 @@ public class Student {
     public Student(String name, int age) {
         this.name = name;
         this.age = age;
+            for(int i = 0 ; i<5; i++){
+            Test ts = new Test("name",45);
+            
+            testlist.add(ts);
+        
+        }
     }
     
 
@@ -70,6 +93,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public ArrayList<String> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<String> list) {
+        this.list = list;
     }
 
     @Override

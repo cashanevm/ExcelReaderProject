@@ -1,0 +1,122 @@
+.process-form {
+	padding-top: 200px;
+}
+
+.first-process {
+	&__title {
+		font-family: Roboto;
+		font-weight: bold;
+		font-size: 50px;
+		line-height: 59px;
+		color: #ffffff;
+		padding-bottom: 58px;
+	}
+
+	&__subtitle {
+		display: block;
+		font-family: Roboto;
+		font-weight: bold;
+		font-size: 30px;
+		line-height: 35px;
+		color: #ffffff;
+		padding-bottom: 36px;
+	}
+
+	&__row {
+		display: flex;
+		align-items: center;
+	}
+
+	&__upload {
+		position: absolute;
+		overflow: hidden;
+		z-index: -5;
+		height: 0.1px;
+		width: 0.1px;
+		opacity: 0;
+	}
+
+	&__upload-label {
+		display: flex;
+	}
+
+	&__upload-icon {
+		cursor: pointer;
+		display: block;
+		height: 30px;
+		transition: 1s;
+	}
+
+	&__upload-icon:hover {
+		transform: scale(1.1);
+	}
+
+	&__upload-file {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: 20px;
+		padding: 0 10px;
+		min-width: 178px;
+		height: 30px;
+		color: rgb(83, 77, 77);
+		background-color: white;
+	}
+
+	&__check {
+		padding-top: 75px;
+		display: flex;
+	}
+
+	&__check-item {
+		position: relative;
+	}
+
+	&__check-item + &__check-item {
+		padding-left: 45px;
+	}
+
+	&__check-true {
+		@extend %check-font;
+	}
+
+	&__check-false {
+		@extend %check-font;
+	}
+
+	&__check-true::before {
+		@extend %check-before;
+		background: url(../fonts/true.svg) 0 0/ 100% no-repeat;
+	}
+
+	&__check-false::before {
+		@extend %check-before;
+		background: url(../fonts/false.svg) 0 0/ 100% no-repeat;
+	}
+
+	&__btn {
+		margin-top: 92px;
+		width: 350px;
+		height: 54px;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+		font-family: Manrope;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 20px;
+		text-align: center;
+		font-feature-settings: "liga" off;
+		color: #ffffff;
+		transition: 1s;
+	}
+
+	&__btn:hover {
+		transform: scale(0.97);
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.5);
+	}
+
+	&__btn:focus {
+		outline: none;
+	}
+}
