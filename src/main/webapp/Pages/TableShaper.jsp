@@ -4,8 +4,8 @@
     Author     : NEVM PC
 --%>
 
-<%@page import="org.obrii.fit.mit.NevmProject.Table.Table"%>
-<%@page import="org.obrii.fit.mit.NevmProject.FileReader.FileName"%>
+<%@page import="org.obrii.fit.mit.ExcelReaderSpring.Table.Table"%>
+<%@page import="org.obrii.fit.mit.ExcelReaderSpring.FileReader.FileName"%>
 <%@page import="java.util.List"%>
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
