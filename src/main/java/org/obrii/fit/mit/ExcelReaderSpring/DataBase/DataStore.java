@@ -35,11 +35,9 @@ import org.obrii.fit.mit.ExcelReaderSpring.Table.Table;
 public class DataStore {
 //    List<Data> data = new ArrayList<>();
 //    
-   Statement statementMain;
+  
     public DataStore() throws SQLException{
-            Connection connection = DataBaseConnection.connect();
-            Statement statement = connection.createStatement();
-            statementMain = statement;
+           
 
         //ResultSet resultSet = statement.executeQuery("select * from users");            
            //while( resultSet.next()){
@@ -50,24 +48,28 @@ public class DataStore {
     
      public ArrayList<String> GetTablesNames() throws SQLException{
             ArrayList<String> TablesName = new ArrayList<String>();
-            
-            Statement statement = statementMain;
+             Connection connection = DataBaseConnection.connect();
+            Statement statement = connection.createStatement();
+          
             ResultSet resultSet = statement.executeQuery("select * from files_id");            
             while( resultSet.next()){
                 TablesName.add(resultSet.getString(2));
             }
+            connection.close();
             return   TablesName ;
    }
     
      public String GetTablesId(String name) throws SQLException{
-            Statement statement = statementMain;
+             Connection connection = DataBaseConnection.connect();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from files_id");            
             while( resultSet.next()){
               if(resultSet.getString(2).equals(name)){
-              
+              connection.close();
               return  resultSet.getString(1);
               }  
             }
+            connection.close();
             return  null ;
    }
      
@@ -79,7 +81,8 @@ public class DataStore {
             ArrayList<String> stringSheetsName = new ArrayList<String>();
             ArrayList<Integer> rowsID = new ArrayList<Integer>();
             ArrayList<Integer> cellsID = new ArrayList<Integer>();
-            Statement statement = statementMain;
+            Connection connection = DataBaseConnection.connect();
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from files_info");            
             while( resultSet.next()){
                 if(parseInt(resultSet.getString(3))== Id){
@@ -127,6 +130,7 @@ public class DataStore {
 
                 //Tables.add(new Data(parseInt(resultSet.getString(1))  ,resultSet.getString(2),parseInt(resultSet.getString(3))));
             }
+            connection.close();
             return   newTable ;
    }
      
@@ -138,8 +142,10 @@ public class DataStore {
         int TableId = 0; 
         //data=('iPhone X', 76000)
         //table=files_id(naming)
-        int CreateTableSRow = statementMain.executeUpdate("INSERT INTO files_id(naming) VALUES ('"+ table.getName() +"')" );
-        ResultSet resultSet = statementMain.executeQuery("select * from files_id");      
+         Connection connection = DataBaseConnection.connect();
+            Statement statement = connection.createStatement();
+        int CreateTableSRow = statement.executeUpdate("INSERT INTO files_id(naming) VALUES ('"+ table.getName() +"')" );
+        ResultSet resultSet = statement.executeQuery("select * from files_id");      
         while( resultSet.next()){
             if(table.getName().equals(resultSet.getString(2))){}
             TableId = parseInt(resultSet.getString(1));
@@ -147,13 +153,48 @@ public class DataStore {
         //data=('iPhone X', 76000)
         //table="files_info(id , naming ,tables_id , line , possition , height , val , sheet)"     
         for(int i=0; i<table.getSheetList().size();i++){
+            System.out.println(String.valueOf(table.getSheetList().size()));
+           System.out.println("complite");
             for(int k=0; k<table.getSheetList().get(i).getRowList().size();k++){
                 for(int h=0; h<table.getSheetList().get(i).getRowList().get(k).getCellList().size();h++){
-                    int CellTableSRow = statementMain.executeUpdate("INSERT INTO files_info(id , naming ,tables_id , line , possition , height , val , sheet) VALUES ('"+ table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getId()  +"' , '"+table.getName()+"' ,"+String.valueOf(TableId)+" , "+table.getSheetList().get(i).getRowList().get(k).getId()+" , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getPossion()+"' , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getHieght()+"' , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getValue()+"' , '"+table.getSheetList().get(i).getName()+"')" );
+                    int CellTableSRow = statement.executeUpdate("INSERT INTO files_info(id , naming ,tables_id , line , possition , height , val , sheet) VALUES ('"+ table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getId()  +"' , '"+table.getName()+"' ,"+String.valueOf(TableId)+" , "+table.getSheetList().get(i).getRowList().get(k).getId()+" , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getPossion()+"' , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getHieght()+"' , '"+table.getSheetList().get(i).getRowList().get(k).getCellList().get(h).getValue()+"' , '"+table.getSheetList().get(i).getName()+"')" );
                 }
             }
         }
+        System.out.println("complite");
+        connection.close();
     }
+    
+    
+    public void addRow(Table table, String[] rows) throws SQLException{
+        int TableId = -1; 
+        //data=('iPhone X', 76000)
+        //table=files_id(naming)
+         Connection connection = DataBaseConnection.connect();
+            Statement statement = connection.createStatement();
+        
+        //data=('iPhone X', 76000)
+        //table="files_info(id , naming ,tables_id , line , possition , height , val , sheet)"     
+  
+           for (String rowInfo : rows) {
+                System.out.println("rowInfo:"+rowInfo);
+              String[] row = rowInfo.split("-");
+                System.out.println("0:"+row[0]);
+                 System.out.println("1:"+row[1]);
+               
+               for(int h=0; h<table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getCellList().size();h++){
+                    int CellTableSRow = statement.executeUpdate("INSERT INTO files_info(id , naming ,tables_id , line , possition , height , val , sheet) VALUES ('"+ table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getCellList().get(h).getId()  +"' , '"+table.getName()+"' ,"+String.valueOf(TableId)+" , "+table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getId()+" , '"+table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getCellList().get(h).getPossion()+"' , '"+table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getCellList().get(h).getHieght()+"' , '"+table.getSheetList().get(Integer.parseInt(row[0])).getRowList().get(Integer.parseInt(row[1])).getCellList().get(h).getValue()+"' , '"+table.getSheetList().get(Integer.parseInt(row[0])).getName()+"')" );
+                }
+        }
+         
+                
+            
+        
+        System.out.println("complite");
+        connection.close();
+    }
+    
+    
     
     
 //    

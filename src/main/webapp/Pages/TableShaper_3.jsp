@@ -61,35 +61,25 @@ text-align: left;
        
        
    String data = (String) request.getAttribute("table");
-   
+    
    %>
        
        <div class="wrapper">
         <div class="container">
             <section class="title">Процес 1 завершено <span>успішно.</span><%=FileName.getFileName()%></section>
             <section class="tables__fields-wrapper">
-                <div class="tables__fields">
-                    <%=data%>
+                <div class="tables__fields" >
+                     <%=data%>
                 </div>
                 <div class="edit__tables-field">
-                    <form action="<%=request.getContextPath()%>/new" method="get">
-                        <input type="submit" value="" class="btn-table__edit" id="btn-edit">
-                    </form>
+                   
                 </div>
             </section>
             <section class="gohome__btn">
-                <form action="<%=request.getContextPath()%>/Form" class="home__page-link">
-                    <input type="submit" value="Надіслати частково" class="home__page-wrapper">
-                </form>
-                <form action="<%=request.getContextPath()%>/Receive" method="get" class="home__page-link">
-                    <input type="submit" value="Надіслати" class="home__page-wrapper">
-                </form>
-                <form action="<%=request.getContextPath()%>/Pages/LoadingFile.jsp" class="home__page-link">
-                    <input type="submit" value="Завантажте інший файл" class="home__page-wrapper">
-                </form>
-                    <form action="<%=request.getContextPath()%>/post" method="post" class="home__page-link">
-                    <input type="submit" value="POST запит" class="home__page-wrapper">
-                </form>
+
+                
+                
+       
             </section>
         </div>
     </div>

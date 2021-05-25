@@ -70,7 +70,17 @@ public class  Table implements Serializable {
     public void setSheet(SheetT sheet) {
         this.Sheets.add(sheet);
     }
-    
+   public int getMaxRow() {
+       int MaxRows = 0; 
+       for(int i = 0; i<this.getSheetList().size();i++){
+       MaxRows = MaxRows + this.getSheetList().get(i).getRowList().size();
+       
+       }
+        
+        
+        
+       return Max;
+    } 
     
 public int getMax() {
         return Max;

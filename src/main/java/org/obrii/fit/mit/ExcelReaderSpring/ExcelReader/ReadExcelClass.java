@@ -677,6 +677,7 @@ public static String  tableFormater(Table table, boolean canWrite){
                             } else{
                                 if(    mainValue.get(mainPossion.indexOf(usedPossion.get(usedPossion.size()-1))).equals("none")         ){}else{
                                 TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">"+ ""  +"</td>";                
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
                                 }
                             }                            
                             //tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizeSell+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                                            
@@ -686,14 +687,16 @@ public static String  tableFormater(Table table, boolean canWrite){
                             }                
                             else if(Integer.parseInt(listH.get(mainPossion.indexOf(usedPossion.get(k))))== 1){
                                 TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">         ";
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
                                 if(canWrite){
                                     //TableBody = TableBody + "<form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""+ mainValue.get(mainPossion.indexOf(usedPossion.get(k))) +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";                              
                                     TableBody = TableBody +  "<form class=\"form\" action=\""+ getUrl()+"/new\" methd=\"get\"><div class=\"form__input-container\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\" class=\"form__input\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><div class=\"form__btn-container\"><button type=\"button\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/cancel.svg\" alt=\"\"></button><button type=\"submit\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/checked.svg\" alt=\"\"></button></div></div></form>";
-                            
+                                    table.getSheetList().get(i).getRowList().get(h).setWritten();
                                 }
                                 else{
                                     TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
                                 }                                                                                                                
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
                                 TableBody = TableBody +  "</td>";                
                             }
                             else{
@@ -701,13 +704,15 @@ public static String  tableFormater(Table table, boolean canWrite){
                         }            
                         else{                            
                             TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">";
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
                             if(canWrite){
                                 //TableBody = TableBody + " <form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";
                             TableBody = TableBody +  "<form class=\"form\" action=\""+ getUrl()+"/new\" methd=\"get\"><div class=\"form__input-container\" ><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\" class=\"form__input\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><div class=\"form__btn-container\"><button type=\"button\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/cancel.svg\" alt=\"\"></button><button type=\"submit\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/checked.svg\" alt=\"\"></button></div></div></form>";
-                            
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
                             }else{
                                 TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
                             }                             
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
                             TableBody = TableBody + "</td>";
                         }
                     }
@@ -727,6 +732,149 @@ public static String  tableFormater(Table table, boolean canWrite){
     TableBody = TableBody + "</table>";                                                                                                
     return TableBody;
 }
+
+public static String  tableFormaterSec(Table table, boolean canWrite){
+    ArrayList<String> mainPossion = new ArrayList<>();
+    ArrayList<String> mainValue = new ArrayList<>();
+    ArrayList<String> heightPossion = new ArrayList<>();
+    ArrayList<String> HeightList = new ArrayList<>();
+    int RowCounter = 0;
+    for(int i=0;i<=table.getMax();i++){      
+        HeightList.add("1");
+    }    
+    String TableBody ="<form action=\""+ getUrl()+"/Form\" method=\"post\"><table>"+"<table>";
+    for(int i =0 ; i< table.getSheetList().size();i++){
+        TableBody = TableBody +"<td>#</td><td>#</td><td rowspan='1' colspan='"+ String.valueOf(table.getMax())+ "' >"+ table.getSheetList().get(i).getName()+"</td>";              
+        for(int h =0 ; h< table.getSheetList().get(i).getRowList().size();h++){
+            TableBody = TableBody + "<tr><td>"+ table.getSheetList().get(i).getRowList().get(h).getId() +"</td>"+"<td>"+ "<input type=\"checkbox\"  value=\""+i+"-"+String.valueOf(table.getSheetList().get(i).getRowList().get(h).getId())+"\" name=\"rows\">" +"</td>";
+                for(int j =0 ; j< table.getSheetList().get(i).getRowList().get(h).getCellList().size();j++){
+                    System.out.println();
+                    mainPossion.add(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getPossion());
+                    mainValue.add(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getValue());
+                    heightPossion.add(table.getSheetList().get(i).getRowList().get(h).getCellList().get(j).getHieght());                 
+                }                                                                             
+                
+
+
+
+
+                //SET HEIGHT TO GLOBAL//
+                for(int v=0;v<heightPossion.size();v++){
+                    if(Integer.parseInt(heightPossion.get(v))>1){                    
+                    HeightList.set(v,String.valueOf(Integer.parseInt(heightPossion.get(v))+1));
+                    }                   
+                }   
+                //GET HIEGHT HELPER//       
+                ArrayList<String> listH = new ArrayList<>();    
+                for(int v=0;v<HeightList.size();v++){
+                    listH.add(HeightList.get(v));    
+                }        
+                //ALGORITHM HIEGHT - 1
+                for(int v=0;v<HeightList.size();v++){
+                    if(Integer.parseInt(HeightList.get(v))>1){
+                        HeightList.set(v,String.valueOf(Integer.parseInt(HeightList.get(v))-1));
+                    }
+                }                                                                                 
+                ArrayList<String> usedPossion = new ArrayList<String>();              
+                //usedPossion FORMATER//
+                for(int v=0;v<mainPossion.size();v++){
+                    if(v>0 ){
+                        if(!mainPossion.get(v).equals(mainPossion.get(v-1))){
+                            usedPossion.add(mainPossion.get(v));
+                        }
+                    }else{
+                        usedPossion.add(mainPossion.get(v));
+                    }
+                }  
+                //ADD MAX VALUE OF SELLS IN ROW TO usedPossion//
+                usedPossion.add(String.valueOf(table.getMax()));                                                                                                                        
+                //SIZE///  
+                ArrayList<String> Pos = new ArrayList<String>();               
+                for(int v=0;v<mainPossion.size();v++){ 
+                    Pos.add( mainPossion.get(v));
+                }                    
+                ArrayList<String> sizePos = new ArrayList<String>();
+                int size = 0;          
+                for(int v=0;v<usedPossion.size();v++){ 
+                    for(int q=0;q<Pos.size();q++){
+                        if(Pos.get(q).equals(usedPossion.get(v))){
+                            Pos.set(q,"skipp");
+                            size++; 
+                        } 
+                        else if(Pos.get(q).equals("skipp")){}
+                        else{
+                            break;                                                           
+                        }                                  
+                    }  
+                    if(size == 0){sizePos.add(String.valueOf(1));}else{sizePos.add(String.valueOf(size));}                    
+                    size = 0;    
+                }
+                // <form action="<%=request.getContextPath()%>/new" methd="get"><input type="text" name="value" value="<%=data.getName()%>"><input type="hidden" name="pos" value="<%=data.getName()%>"><input type="hidden" name="row" value="<%=data.getName()%>"><input type="submit" value="update data" ></form>                                                                                                                                
+                //STRING FORMATER//    
+                for(int k=0;k<usedPossion.size();k++){                  
+                    try{                        
+                        if(mainValue.get(mainPossion.indexOf(usedPossion.get(k))).equals("none")){
+                            if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
+                            } else{
+                                if(    mainValue.get(mainPossion.indexOf(usedPossion.get(usedPossion.size()-1))).equals("none")         ){}else{
+                                TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">"+ ""  +"</td>";                
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
+                                }
+                            }                            
+                            //tableRow = tableRow + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(i))) +"' colspan='"+sizeSell+"' style=\" width:"+String.valueOf(50*sizeSell)+"px;\"class=\""+sizeSell+"__"+usedPossion.get(i)+"\">"+  mainValue.get(mainPossion.indexOf(usedPossion.get(i)))  +"</td>";                                            
+                        }
+                        else if(mainValue.get(mainPossion.indexOf(usedPossion.get(k))).equals("null")||mainValue.get(mainPossion.indexOf(usedPossion.get(k))).equals("")||mainValue.get(mainPossion.indexOf(usedPossion.get(k))).equals("none")){
+                            if(mainValue.get(0).equals("null")||mainValue.get(0).equals("")||mainValue.get(0).equals("none")){                
+                            }                
+                            else if(Integer.parseInt(listH.get(mainPossion.indexOf(usedPossion.get(k))))== 1){
+                                TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">         ";
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
+                                if(canWrite){
+                                    //TableBody = TableBody + "<form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""+ mainValue.get(mainPossion.indexOf(usedPossion.get(k))) +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";                              
+                                    TableBody = TableBody +  "<form class=\"form\" action=\""+ getUrl()+"/new\" methd=\"get\"><div class=\"form__input-container\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\" class=\"form__input\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><div class=\"form__btn-container\"><button type=\"button\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/cancel.svg\" alt=\"\"></button><button type=\"submit\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/checked.svg\" alt=\"\"></button></div></div></form>";
+                                    table.getSheetList().get(i).getRowList().get(h).setWritten();
+                                }
+                                else{
+                                    TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
+                                }                                                                                                                
+                                table.getSheetList().get(i).getRowList().get(h).setWritten();
+                                TableBody = TableBody +  "</td>";                
+                            }
+                            else{
+                            }            
+                        }            
+                        else{                            
+                            TableBody = TableBody + "<td rowspan='"+heightPossion.get(mainPossion.indexOf(usedPossion.get(k))) +"' colspan='"+sizePos.get(k)+"' class=\""+sizePos.get(k)+"__"+usedPossion.get(k)+"\">";
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
+                            if(canWrite){
+                                //TableBody = TableBody + " <form action=\""+ getUrl()+"/new\" methd=\"get\"><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><input type=\"submit\" value=\"update data\" ></form>";
+                            TableBody = TableBody +  "<form class=\"form\" action=\""+ getUrl()+"/new\" methd=\"get\"><div class=\"form__input-container\" ><input type=\"text\" name=\"value\" value=\""             +  mainValue.get(mainPossion.indexOf(usedPossion.get(k)))  +"\" class=\"form__input\"><input type=\"hidden\" name=\"pos\" value=\""+usedPossion.get(k)+"\"><input type=\"hidden\" name=\"row\" value=\""+String.valueOf(RowCounter) +"\"><div class=\"form__btn-container\"><button type=\"button\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/cancel.svg\" alt=\"\"></button><button type=\"submit\" class=\"form__btn\"><img class=\"form__btn-icon\" src=\""+ getUrl()+"/PagesRes/TableDisplay/checked.svg\" alt=\"\"></button></div></div></form>";
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
+                            }else{
+                                TableBody = TableBody + mainValue.get(mainPossion.indexOf(usedPossion.get(k)));
+                            }                             
+                            table.getSheetList().get(i).getRowList().get(h).setWritten();
+                            TableBody = TableBody + "</td>";
+                        }
+                    }
+                    catch(Exception e){
+                    }
+                    //sizeSell=0;        
+                }                                                                                                                                                                                                             
+                TableBody = TableBody + "</tr>";
+                RowCounter++;
+                mainPossion.clear();
+                mainValue.clear();
+                heightPossion.clear();
+                listH.clear();
+        }
+        RowCounter=0;
+    }
+    TableBody = TableBody + "</table> <input type=\"submit\" value=\"ok\"></form>";                                                                                                
+    return TableBody;
+}
+
+
 }
 
 

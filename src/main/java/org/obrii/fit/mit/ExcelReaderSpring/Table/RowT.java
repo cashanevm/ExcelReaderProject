@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class  RowT implements Serializable {
     private ArrayList<CellT> Cells = new ArrayList<CellT>(); 
     private int id;
-    
-
+    private boolean written = false;
+     
     public RowT() {
     }
 
@@ -34,6 +34,14 @@ public ArrayList<String> getRowString(int id) {
     
     
     return list;
+    }
+
+    public void setWritten() {
+        this.written = true;
+    }
+
+    public boolean isWritten() {
+        return written;
     }
     
  public ArrayList<CellT> getCellList(){
