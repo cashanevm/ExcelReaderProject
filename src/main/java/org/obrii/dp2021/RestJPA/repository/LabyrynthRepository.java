@@ -6,17 +6,19 @@
 package org.obrii.dp2021.RestJPA.repository;
 
 import java.util.List;
-import org.obrii.dp2021.RestJPA.entity.Body;
 
+import org.obrii.dp2021.RestJPA.entity.Book;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  *
  * @author NEVM PC
  */
-@RepositoryRestResource(collectionResourceRel="body", path="body")
-public interface StudentRepository extends PagingAndSortingRepository<Body,Long>{
-    List<Body> findByName(@Param("name") String name);
+@RepositoryRestResource(collectionResourceRel="book", path="book")
+public interface LabyrynthRepository extends PagingAndSortingRepository<Book,Long>{
+//    List<Labyrynth> findByName(@Param("name") String name);
+//    List<Labyrynth> findByOwner(@Param("owner") String owner);
+        List<Book> findByTitle(String title);
+        List<Book> findAll();
 }
